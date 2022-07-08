@@ -133,10 +133,12 @@ try:
                     break
 
                 elif option == "3":
+                    if len(database.read_sensitive_data()) == 0:
+                        print(" 0 Passwords added")
+                        screen_formatter()
+                        break
                     while True:
-                        print(f'\n Identifier\tpassword:username:location')
-                        for (id, password, username, location) in database.read_sensitive_data():
-                            print(f' {id}\t\t{decrypt(password)}:{username}:{location}')
+                        show_passwords()
                         i = int(input(" Identifier of entry to be updated:"))
                         setted_id = -1
                         for (id, password, username, location) in database.read_sensitive_data():
@@ -168,6 +170,10 @@ try:
 
 
                 elif option == "2":
+                    if len(database.read_sensitive_data()) == 0:
+                        print(" 0 Passwords added")
+                        screen_formatter()
+                        break
                     show_passwords()
                     if input("-1 to go back:") == "-1":
                         screen_formatter()
@@ -183,7 +189,7 @@ try:
                             store_password(p, u, l)
                         elif save == "n":
                             break
-                        cont = input(" Continue saving password? y/n:")
+                        cont = input(" Continue adding password? y/n:")
                         if cont == "y":
                             print(" Please wait...")
                             screen_formatter()
