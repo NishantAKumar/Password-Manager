@@ -31,11 +31,11 @@ class Database:
         self.connection.commit()
 
     def update_sensitive_data(self, id, password, username, location):
-        self.cur.execute("UPDATE sensitive_data SET password=?, username=?, location=? where id=?", (password, username, location, id))
+        self.cur.execute("UPDATE sensitive SET password=?, username=?, location=? where id=?", (password, username, location, id))
         self.connection.commit()
     
     def update_admin_data(self, id, password, username):
-        self.cur.execute("UPDATE sensitive_data SET password=?, username=?, location=? where id=?", (password, username, id))
+        self.cur.execute("UPDATE admin SET password=?, username=?, location=? where id=?", (password, username, id))
         self.connection.commit()
 
     def admin_logged_in_setter(self, id, value):
