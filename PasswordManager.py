@@ -1,5 +1,3 @@
-from telnetlib import LOGOUT
-import uuid
 from db import Database
 import hashlib
 from Crypto.Cipher import AES
