@@ -1,5 +1,3 @@
-from telnetlib import LOGOUT
-import uuid
 from db import Database
 import hashlib
 from Crypto.Cipher import AES
@@ -7,6 +5,7 @@ import time
 import sys
 import os
 import platform
+from tabulate import tabulate
 
 CIPHER_PADDED_LENGTH = 128
 SCREEN_TRANSITION_TIME = 0.7
@@ -45,10 +44,10 @@ def update_password(id, password, username, location):
     
 
 def show_passwords():
-    print(f'\n identifier\t<password:username:location>\n')
+    table = []
     for (id, password, username, location) in database.read_sensitive_data():
-        print(f' {id}\t\t<{decrypt(password)}:{username}:{location}>')
-
+        table.append([id, decrypt(password), username, location])
+    print(tabulate(table, headers=["ID", "Password", "Username", "Location"], tablefmt="pretty"))
 
 def admin_login(username, password):
     (id, uname, passwd, logged_in) = get_admin()
